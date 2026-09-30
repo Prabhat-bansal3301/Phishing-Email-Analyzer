@@ -1,0 +1,9 @@
+From: Microsoft Support <support@example.com>
+To: user@example.com
+Reply-To: attacker@evil.com
+Subject: Your account is suspended
+Date: Wed, 30 Sep 2026 10:00:00 +0000
+MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
+
+Your account has been suspended.
