@@ -9,3 +9,13 @@ assert email["subject"] == "Your account is suspended"
 assert "account has been suspended" in email["body"]
 
 print("Parser test passed!")
+
+assert len(email["attachments"]) == 1
+assert email["attachments"][0]["filename"] == "invoice.txt"
+assert email["attachments"][0]["content_type"] == "text/plain"
+
+assert "https://example.com/login" in email["urls"]
+assert "https://attacker.example/login" in email["urls"]
+
+print("Attachment test passed!")
+print("URL extraction test passed!")

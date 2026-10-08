@@ -4,6 +4,34 @@ Reply-To: attacker@evil.com
 Subject: Your account is suspended
 Date: Wed, 30 Sep 2026 10:00:00 +0000
 MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="BOUNDARY"
+
+--BOUNDARY
+Content-Type: multipart/alternative; boundary="ALT"
+
+--ALT
 Content-Type: text/plain; charset="UTF-8"
 
 Your account has been suspended.
+
+Click here: https://example.com/login
+
+--ALT
+Content-Type: text/html; charset="UTF-8"
+
+<html>
+<body>
+<p>Your account has been suspended.</p>
+<a href="https://attacker.example/login">Verify your account</a>
+</body>
+</html>
+
+--ALT--
+
+--BOUNDARY
+Content-Type: text/plain
+Content-Disposition: attachment; filename="invoice.txt"
+
+This is a test attachment.
+
+--BOUNDARY--
