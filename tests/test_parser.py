@@ -16,6 +16,11 @@ assert email["attachments"][0]["content_type"] == "text/plain"
 
 assert "https://example.com/login" in email["urls"]
 assert "https://attacker.example/login" in email["urls"]
+assert isinstance(email["authentication_results"], list)
+assert len(email["authentication_results"]) == 1
+assert "spf=pass" in email["authentication_results"][0]
+
+print("Authentication header extraction test passed!")
 
 print("Attachment test passed!")
 print("URL extraction test passed!")

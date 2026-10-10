@@ -5,6 +5,10 @@ Subject: Your account is suspended
 Date: Wed, 30 Sep 2026 10:00:00 +0000
 MIME-Version: 1.0
 Content-Type: multipart/mixed; boundary="BOUNDARY"
+Authentication-Results: mx.example.net;
+    spf=pass smtp.mailfrom=sender.example;
+    dkim=pass header.d=sender.example;
+    dmarc=pass header.from=sender.example
 
 --BOUNDARY
 Content-Type: multipart/alternative; boundary="ALT"
@@ -15,6 +19,7 @@ Content-Type: text/plain; charset="UTF-8"
 Your account has been suspended.
 
 Click here: https://example.com/login
+Click here: http://example.com/login
 
 --ALT
 Content-Type: text/html; charset="UTF-8"
@@ -22,7 +27,7 @@ Content-Type: text/html; charset="UTF-8"
 <html>
 <body>
 <p>Your account has been suspended.</p>
-<a href="http://attacker.example/login">Verify your account</a>
+<a href="https://attacker.example/login">Verify your account</a>
 </body>
 </html>
 

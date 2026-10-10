@@ -11,5 +11,10 @@ for result in email["analyzed_urls"]:
 print("Email analysis test passed!")
 assert email["summary"]["total_urls"] >= 2
 assert email["summary"]["suspicious_urls"] >= 1
+assert email["authentication"]["spf"] == "pass"
+assert email["authentication"]["dkim"] == "pass"
+assert email["authentication"]["dmarc"] == "pass"
+
+print("Authentication integration test passed!")
 
 print("Risk summary test passed!")

@@ -55,4 +55,5 @@ def parse_eml(file_path):
         "body": body.get_content() if body else None,
         "attachments": attachments,
         "urls": list(dict.fromkeys(urls)),
+        "authentication_results": message.get_all("Authentication-Results", [])
     }

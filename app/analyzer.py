@@ -1,4 +1,4 @@
-
+from app.auth_analyzer import analyze_authentication
 from app.url_analyzer import analyze_url
 
 
@@ -6,7 +6,12 @@ def analyze_email(file_path):
     from app.eml_parser import parse_eml
 
     email = parse_eml(file_path)
+    
+    authentication = analyze_authentication(
+        email["authentication_results"]
+    )
 
+    email["authentication"] = authentication
     analyzed_urls = []
 
     for url in email["urls"]:

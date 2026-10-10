@@ -27,4 +27,12 @@ def generate_report(email):
         else:
             report.append("Indicators: None detected")
 
+        report.append("\n=== EMAIL AUTHENTICATION ===")
+
+    authentication = email["authentication"]
+
+    report.append(f"SPF: {authentication['spf']}")
+    report.append(f"DKIM: {authentication['dkim']}")
+    report.append(f"DMARC: {authentication['dmarc']}")
+
     return "\n".join(report)
