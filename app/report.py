@@ -27,12 +27,26 @@ def generate_report(email):
         else:
             report.append("Indicators: None detected")
 
-        report.append("\n=== EMAIL AUTHENTICATION ===")
+    report.append("\n=== EMAIL AUTHENTICATION ===")
 
     authentication = email["authentication"]
 
     report.append(f"SPF: {authentication['spf']}")
     report.append(f"DKIM: {authentication['dkim']}")
     report.append(f"DMARC: {authentication['dmarc']}")
+
+    report.append("\n=== HEADER ANALYSIS ===")
+
+    header_analysis = email["header_analysis"]
+
+    report.append(f"From address: {header_analysis['from_address']}")
+    report.append(f"Reply-To address: {header_analysis['reply_to_address']}")
+
+    if header_analysis["indicators"]:
+        report.append("Header indicators:")
+        for indicator in header_analysis["indicators"]:
+            report.append(f"- {indicator}")
+    else:
+        report.append("Header indicators: None detected")
 
     return "\n".join(report)

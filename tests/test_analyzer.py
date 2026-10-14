@@ -18,3 +18,6 @@ assert email["authentication"]["dmarc"] == "pass"
 print("Authentication integration test passed!")
 
 print("Risk summary test passed!")
+assert "From and Reply-To domains differ" in email["header_analysis"]["indicators"]
+
+print("Header analysis integration test passed!")

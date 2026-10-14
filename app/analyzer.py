@@ -1,12 +1,13 @@
 from app.auth_analyzer import analyze_authentication
 from app.url_analyzer import analyze_url
-
+from app.header_analyzer import analyze_headers
 
 def analyze_email(file_path):
     from app.eml_parser import parse_eml
 
     email = parse_eml(file_path)
-    
+    header_analysis = analyze_headers(email)
+    email["header_analysis"] = header_analysis
     authentication = analyze_authentication(
         email["authentication_results"]
     )

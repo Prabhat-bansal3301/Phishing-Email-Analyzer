@@ -14,3 +14,7 @@ assert "DMARC: pass" in report
 
 print(report)
 print("\nReport test passed!")
+assert "HEADER ANALYSIS" in report
+assert "From and Reply-To domains differ" in report
+
+print("Header report test passed!")
