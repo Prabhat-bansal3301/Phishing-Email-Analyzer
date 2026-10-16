@@ -42,6 +42,15 @@ def generate_report(email):
     report.append(f"From address: {header_analysis['from_address']}")
     report.append(f"Reply-To address: {header_analysis['reply_to_address']}")
 
+    print(
+        f"Return-Path address: "
+        f"{email['header_analysis']['return_path_address']}"
+    )
+
+    print("Received headers:")
+    for header in email["header_analysis"]["received_headers"]:
+        print(f"- {header}")
+
     if header_analysis["indicators"]:
         report.append("Header indicators:")
         for indicator in header_analysis["indicators"]:
