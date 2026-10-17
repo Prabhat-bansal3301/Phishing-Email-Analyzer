@@ -1,3 +1,4 @@
+
 def generate_report(email):
     report = []
 
@@ -28,28 +29,26 @@ def generate_report(email):
             report.append("Indicators: None detected")
 
     report.append("\n=== EMAIL AUTHENTICATION ===")
-
     authentication = email["authentication"]
-
     report.append(f"SPF: {authentication['spf']}")
     report.append(f"DKIM: {authentication['dkim']}")
     report.append(f"DMARC: {authentication['dmarc']}")
 
     report.append("\n=== HEADER ANALYSIS ===")
-
     header_analysis = email["header_analysis"]
 
     report.append(f"From address: {header_analysis['from_address']}")
     report.append(f"Reply-To address: {header_analysis['reply_to_address']}")
-
-    print(
-        f"Return-Path address: "
-        f"{email['header_analysis']['return_path_address']}"
+    report.append(
+        f"Return-Path address: {header_analysis['return_path_address']}"
     )
 
-    print("Received headers:")
-    for header in email["header_analysis"]["received_headers"]:
-        print(f"- {header}")
+    report.append("Received headers:")
+    if header_analysis["received_headers"]:
+        for header in header_analysis["received_headers"]:
+            report.append(f"- {header}")
+    else:
+        report.append("- None found")
 
     if header_analysis["indicators"]:
         report.append("Header indicators:")
@@ -57,5 +56,30 @@ def generate_report(email):
             report.append(f"- {indicator}")
     else:
         report.append("Header indicators: None detected")
+
+    report.append("\n=== EMAIL CONTENT ANALYSIS ===")
+    content_analysis = email.get("content_analysis", {})
+
+    for key, label in [
+        ("urgency_indicators", "Urgency indicators"),
+        ("credential_indicators", "Credential request indicators"),
+        ("impersonation_indicators", "Impersonation indicators"),
+    ]:
+        indicators = content_analysis.get(key, [])
+        report.append(f"{label}:")
+        if indicators:
+            for indicator in indicators:
+                report.append(f"- {indicator}")
+        else:
+            report.append("- None detected")
+
+    report.append("\n=== HTML ANALYSIS ===")
+    html_indicators = email.get("html_analysis", [])
+
+    if html_indicators:
+        for indicator in html_indicators:
+            report.append(f"- {indicator}")
+    else:
+        report.append("HTML indicators: None detected")
 
     return "\n".join(report)

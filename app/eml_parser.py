@@ -1,4 +1,4 @@
-from email import policy
+from email import message, policy
 from email.parser import BytesParser
 from html.parser import HTMLParser
 import re
@@ -18,7 +18,8 @@ def parse_eml(file_path):
     with open(file_path, "rb") as file:
         message = BytesParser(policy=policy.default).parse(file)
 
-    body = message.get_body(preferencelist=("plain", "html"))
+    plain_body = message.get_body(preferencelist=("plain",))
+    html_body = message.get_body(preferencelist=("html",))
 
     attachments = []
 
@@ -52,7 +53,9 @@ def parse_eml(file_path):
         "return_path": message.get("Return-Path"),
         "subject": message.get("Subject"),
         "date": message.get("Date"),
-        "body": body.get_content() if body else None,
+        "body": plain_body.get_content() if plain_body else (
+            html_body.get_content() if html_body else None),
+        "html_body": html_body.get_content() if html_body else None,
         "attachments": attachments,
         "urls": list(dict.fromkeys(urls)),
         "authentication_results": message.get_all("Authentication-Results", []),
