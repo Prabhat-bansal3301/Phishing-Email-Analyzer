@@ -82,4 +82,37 @@ def generate_report(email):
     else:
         report.append("HTML indicators: None detected")
 
+
+
+    report.append("\n=== ATTACHMENT ANALYSIS ===")
+
+    attachments = email.get("analyzed_attachments", [])
+
+    if not attachments:
+        report.append("No attachments found.")
+    else:
+        for attachment in attachments:
+            report.append(
+                f"\nFilename: {attachment['filename']}"
+            )
+            report.append(
+                f"Extension: {attachment['extension']}"
+            )
+            report.append(
+                f"Content type: {attachment['content_type']}"
+            )
+            report.append(
+                f"Size: {attachment['size']} bytes"
+            )
+            report.append(
+                f"SHA-256: {attachment['sha256'] or 'Unavailable'}"
+            )
+
+            if attachment["indicators"]:
+                report.append("Indicators:")
+                for indicator in attachment["indicators"]:
+                    report.append(f"- {indicator}")
+            else:
+                report.append("Indicators: None detected")
+
     return "\n".join(report)

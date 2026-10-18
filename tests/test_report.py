@@ -1,3 +1,4 @@
+
 from app.analyzer import analyze_email
 from app.report import generate_report
 
@@ -14,7 +15,22 @@ assert "DMARC: pass" in report
 
 print(report)
 print("\nReport test passed!")
+
 assert "HEADER ANALYSIS" in report
 assert "From and Reply-To domains differ" in report
 
 print("Header report test passed!")
+
+assert "ATTACHMENT ANALYSIS" in report
+
+for attachment in email["analyzed_attachments"]:
+    if attachment["filename"]:
+        assert attachment["filename"] in report
+
+    if attachment["sha256"]:
+        assert attachment["sha256"] in report
+
+    for indicator in attachment["indicators"]:
+        assert indicator in report
+
+print("Attachment report test passed!")

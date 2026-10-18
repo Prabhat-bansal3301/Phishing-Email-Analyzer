@@ -4,7 +4,7 @@ from app.auth_analyzer import analyze_authentication
 from app.url_analyzer import analyze_url
 from app.header_analyzer import analyze_headers
 from app.content_analyzer import analyze_content
-
+from app.attachment_analyzer import analyze_attachment
 def analyze_email(file_path):
     from app.eml_parser import parse_eml
 
@@ -39,5 +39,12 @@ def analyze_email(file_path):
         "total_urls": total_urls,
         "suspicious_urls": len(suspicious_urls),
     }
+    analyzed_attachments = []
 
+    for attachment in email["attachments"]:
+        analyzed_attachments.append(
+            analyze_attachment(attachment)
+        )
+
+    email["analyzed_attachments"] = analyzed_attachments
     return email

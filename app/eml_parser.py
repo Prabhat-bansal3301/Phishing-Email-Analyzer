@@ -21,14 +21,19 @@ def parse_eml(file_path):
     plain_body = message.get_body(preferencelist=("plain",))
     html_body = message.get_body(preferencelist=("html",))
 
+    
     attachments = []
 
     for part in message.iter_attachments():
+        payload = part.get_payload(decode=True) or b""
+
         attachments.append({
             "filename": part.get_filename(),
             "content_type": part.get_content_type(),
-            "size": len(part.get_payload(decode=True) or b""),
+            "size": len(payload),
+            "payload": payload,
         })
+
     urls = []
 
     for part in message.walk():

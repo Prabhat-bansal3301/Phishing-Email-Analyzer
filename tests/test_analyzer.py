@@ -57,6 +57,17 @@ def test_html_analysis_is_included():
 
     print("HTML analysis integration test passed!")
 
+def test_attachment_analysis_is_included():
+    email = analyze_email("samples/test_email.eml")
+
+    assert "analyzed_attachments" in email
+    assert len(email["analyzed_attachments"]) >= 1
+
+    for attachment in email["analyzed_attachments"]:
+        assert "filename" in attachment
+        assert "extension" in attachment
+        assert "indicators" in attachment
+        assert "sha256" in attachment
 
 if __name__ == "__main__":
     test_email_analysis()
@@ -64,5 +75,5 @@ if __name__ == "__main__":
     test_header_analysis_integration()
     test_content_analysis_is_included()
     test_html_analysis_is_included()
-
+    test_attachment_analysis_is_included()
     print("All email analyzer integration tests passed!")
