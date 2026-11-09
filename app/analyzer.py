@@ -1,10 +1,12 @@
-import email
 from app.html_analyzer import analyze_html
 from app.auth_analyzer import analyze_authentication
 from app.url_analyzer import analyze_url
 from app.header_analyzer import analyze_headers
 from app.content_analyzer import analyze_content
 from app.attachment_analyzer import analyze_attachment
+from app.virustotal import get_file_report
+import requests
+
 def analyze_email(file_path):
     from app.eml_parser import parse_eml
 
@@ -42,9 +44,25 @@ def analyze_email(file_path):
     analyzed_attachments = []
 
     for attachment in email["attachments"]:
-        analyzed_attachments.append(
-            analyze_attachment(attachment)
-        )
+        result = analyze_attachment(attachment)
+
+        try:
+            result["virustotal"] = get_file_report(
+                result["sha256"]
+            )
+
+        except RuntimeError:
+            result["virustotal"] = {
+                "status": "unavailable",
+                "message": "VirusTotal API key is not configured.",
+            }
+
+        except requests.exceptions.RequestException as error:
+            result["virustotal"] = {
+                "status": "error",
+                "message": str(error),
+            }
+        analyzed_attachments.append(result)
 
     email["analyzed_attachments"] = analyzed_attachments
     return email

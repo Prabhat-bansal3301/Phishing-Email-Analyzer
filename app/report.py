@@ -84,6 +84,7 @@ def generate_report(email):
 
 
 
+    
     report.append("\n=== ATTACHMENT ANALYSIS ===")
 
     attachments = email.get("analyzed_attachments", [])
@@ -115,4 +116,23 @@ def generate_report(email):
             else:
                 report.append("Indicators: None detected")
 
+            virustotal = attachment.get("virustotal", {})
+            report.append("\nVirusTotal Analysis:")
+
+            if virustotal.get("status") == "success":
+                stats = virustotal["stats"]
+
+                report.append(f"Malicious: {stats['malicious']}")
+                report.append(f"Suspicious: {stats['suspicious']}")
+                report.append(f"Undetected: {stats['undetected']}")
+                report.append(f"Harmless: {stats['harmless']}")
+                report.append(f"Unsupported: {stats['unsupported']}")
+                report.append(f"Total engines: {stats['total_engines']}")
+
+            else:
+                report.append(
+                    f"Status: {virustotal.get('status', 'unavailable')}"
+                )
+
     return "\n".join(report)
+

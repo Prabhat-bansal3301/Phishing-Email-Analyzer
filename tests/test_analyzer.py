@@ -1,5 +1,7 @@
 
 from app.analyzer import analyze_email
+from unittest.mock import patch,Mock
+import requests
 
 
 def test_email_analysis():
@@ -68,6 +70,49 @@ def test_attachment_analysis_is_included():
         assert "extension" in attachment
         assert "indicators" in attachment
         assert "sha256" in attachment
+    print("Attachment analysis integration test passed!")
+
+def test_missing_virustotal_api_key():
+    with patch(
+        "app.virustotal.os.getenv",
+        return_value=None
+    ):
+        email = analyze_email("samples/test_email.eml")
+
+    for attachment in email["analyzed_attachments"]:
+        assert attachment["virustotal"]["status"] == "unavailable"
+
+    print("Missing VirusTotal API key test passed!")
+
+def test_virustotal_network_error():
+    with patch(
+        "app.virustotal.requests.get",
+        side_effect=requests.exceptions.ConnectionError(
+            "Network unavailable"
+        )
+    ):
+        email = analyze_email("samples/test_email.eml")
+
+    for attachment in email["analyzed_attachments"]:
+        assert attachment["virustotal"]["status"] == "error"
+        assert "Network unavailable" in attachment["virustotal"]["message"]
+
+    print("VirusTotal network error test passed!")
+
+def test_virustotal_rate_limit():
+    mock_response = Mock()
+    mock_response.status_code = 429
+
+    with patch(
+        "app.virustotal.requests.get",
+        return_value=mock_response
+    ):
+        email = analyze_email("samples/test_email.eml")
+
+    for attachment in email["analyzed_attachments"]:
+        assert attachment["virustotal"]["status"] == "rate_limited"
+
+    print("VirusTotal rate limit test passed!")
 
 if __name__ == "__main__":
     test_email_analysis()
@@ -76,4 +121,7 @@ if __name__ == "__main__":
     test_content_analysis_is_included()
     test_html_analysis_is_included()
     test_attachment_analysis_is_included()
+    test_missing_virustotal_api_key()
+    test_virustotal_network_error()
+    test_virustotal_rate_limit()
     print("All email analyzer integration tests passed!")
