@@ -6,6 +6,7 @@ from app.content_analyzer import analyze_content
 from app.attachment_analyzer import analyze_attachment
 from app.virustotal import get_file_report
 import requests
+from app.risk_engine import calculate_risk
 
 def analyze_email(file_path):
     from app.eml_parser import parse_eml
@@ -65,4 +66,5 @@ def analyze_email(file_path):
         analyzed_attachments.append(result)
 
     email["analyzed_attachments"] = analyzed_attachments
+    email["risk_assessment"] = calculate_risk(email)
     return email

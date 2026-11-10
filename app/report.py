@@ -7,6 +7,31 @@ def generate_report(email):
     report.append(f"To: {email['to']}")
     report.append(f"Subject: {email['subject']}")
 
+    report.append("\n=== RISK ASSESSMENT ===")
+
+    risk = email["risk_assessment"]
+
+    report.append(
+        f"Overall Score: {risk['score']}/{risk['max_score']}"
+    )
+    report.append(f"Risk Level: {risk['risk_level']}")
+
+    report.append("\nCategory Scores:")
+
+    for name, category in risk["categories"].items():
+        report.append(
+            f"{name.title()}: "
+            f"{category['score']}/{category['max_score']}"
+        )
+
+    report.append("\nRisk Explanations:")
+
+    if risk["explanations"]:
+        for explanation in risk["explanations"]:
+            report.append(f"- {explanation}")
+    else:
+        report.append("No suspicious indicators detected.")
+
     report.append("\n=== URL SUMMARY ===")
     report.append(f"Total URLs: {email['summary']['total_urls']}")
     report.append(
