@@ -1,0 +1,88 @@
+Delivered-To: bansalprabhat123+k945@gmail.com
+Received: by 2002:ac0:eb45:0:b0:406:d095:5fda with SMTP id s5csp2170883imu;
+        Thu, 15 Oct 2026 12:33:30 -0700 (PDT)
+X-Received: by 2002:a05:6a00:35c4:b0:89e:8242:f35f with SMTP id d2e1a72fcca58-89e824327cemr3090653b3a.13.1792092810539;
+        Thu, 15 Oct 2026 12:33:30 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1792092810; cv=none;
+        d=google.com; s=arc-20260327;
+        b=ee/K0MUlSQTaEAEtXYiU0yeEdL901U2EiQ0HjGSHCdwAJClQb2QwbveG53KgQfIreu
+         CuqDkXpJtXA8hJ7RrYXD2bi/7GMT9kfdAlM8oo7829AZQsturyKZ+u39o21yCsuitkNm
+         Z7x2ep1VQEiVyvELDj2IKOrzfBkJi4O7DaZ7psO8hgCrin+5+ULt1w1mJBrmFgUmduZx
+         ZYSe+2sp8b0mogsfJradN65DSEWiArt1hZH0ceKs3CBZjD538bwyaQev1lOUcrt8J7Ju
+         1ctCBsXT9ozUnSYBc7s90k0iKo332XihkopesKPasSdAAaxgpMe23TCX5qQN3qGlQ18l
+         M0WA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=content-transfer-encoding:mime-version:message-id:reply-to:from
+         :date:subject:to:dkim-signature;
+        bh=g+Q3oQp6D5mqbPatY14vPdKYvl/XVQBU43i75IcD7ZA=;
+        fh=yehNw/TFZK4m1pb3X0ie87GLDNcuoRilHySGYNZ2DXE=;
+        b=qkTU7QJwMtdrBTcuFzSaou7OOETe6IwHuGYcYyKDEEYy+vA27pjFiMkqd2YOwsc42Z
+         TMzGz+FnSWOFzIlytlsqH/8i9CMO5TrbYRFl6OHvbkBYNco2UHERVnNybX0I4BXf5YqZ
+         dWJHNFGjBrmtwlfglqErV0U5g2xb/BuzUtuxplW9ox3oc9l8vkGzczslzT9KtSwILr4B
+         1rp7yhbdpG94kzPHnMaw/ZDVoP4XAd6byxOasWR5uYBRPv85DTvf9VuEZE8ckOaSJlX3
+         hC/TmYJGkm69unGaUCSNH/yfMZlNpXNEML9zKcdIdkH9g52am5z57fyl9Dd24FjXMZLl
+         839A==;
+        dara=google.com
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@feso.or.jp header.s=default header.b=o28hVBC5;
+       spf=pass (google.com: domain of ccc97jp@sv3002.xserver.jp designates 202.254.234.3 as permitted sender) smtp.mailfrom=ccc97jp@sv3002.xserver.jp;
+       dmarc=pass (p=QUARANTINE sp=QUARANTINE dis=NONE) header.from=feso.or.jp
+Return-Path: <ccc97jp@sv3002.xserver.jp>
+Received: from sv3002.xserver.jp (sv3002.xserver.jp. [202.254.234.3])
+        by mx.google.com with ESMTPS id d2e1a72fcca58-89f338d7cbesi1396544b3a.83.2026.10.15.12.33.29
+        for <bansalprabhat123+k945@gmail.com>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 15 Oct 2026 12:33:30 -0700 (PDT)
+Received-SPF: pass (google.com: domain of ccc97jp@sv3002.xserver.jp designates 202.254.234.3 as permitted sender) client-ip=202.254.234.3;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@feso.or.jp header.s=default header.b=o28hVBC5;
+       spf=pass (google.com: domain of ccc97jp@sv3002.xserver.jp designates 202.254.234.3 as permitted sender) smtp.mailfrom=ccc97jp@sv3002.xserver.jp;
+       dmarc=pass (p=QUARANTINE sp=QUARANTINE dis=NONE) header.from=feso.or.jp
+X-Virus-Status: scanned (With Secure/Atlant/virusgw2411.xserver.jp/)
+Received: by sv3002.xserver.jp (Postfix, from userid 20011)
+	id 45DB4140003DCDE; Fri, 16 Oct 2026 04:33:28 +0900 (JST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=feso.or.jp;
+	s=default; t=1792092808;
+	bh=g+Q3oQp6D5mqbPatY14vPdKYvl/XVQBU43i75IcD7ZA=;
+	h=To:Subject:Date:From:Reply-To:From;
+	b=o28hVBC5me2IrSa5slitIHfHb1pSMU2apr+mmFsDlxqdfzvxx5eEdc5e8SWZ7IPCP
+	 uaa+3iNbtieCwWQIRgsPbPuf8YlPURC4vYeNpcfV/Ep6geHBDVwqG+dtzfzZeikrhJ
+	 3W1dQ5ZATcn1qc+wZfOXX/i1Gf26waQUvbVzh3M/FSQQLDpFcao5p06YZDiifmtr+A
+	 iL9gYxdEdec5svpv0sAPqGQr00ISHIoe53ZAzp+LoBIzMKLYgffmdEarCxC+r2GKzG
+	 h117vqrqnE1uwrWfjZagBqCjL1XtzKcQkWfdCT5+6fhb+w6qU9F1rt+tA5y9yEttgZ
+	 JQWRml6piwLsw==
+To: bansalprabhat123+k945@gmail.com
+Subject: =?UTF-8?B?44GK5ZWP44GE5ZCI44KP44Gb44GC44KK44GM44Go44GG44GU44GW44GE44G+?=
+ =?UTF-8?B?44GZ772c5LiA6Iis56S+5Zuj5rOV5Lq65aSW5Zu95Lq65bCx5Yq05pSv5o+0?=
+ =?UTF-8?B?5qmf5qeL?=
+Date: Thu, 15 Oct 2026 19:33:28 +0000
+From: =?UTF-8?B?5LiA6Iis56S+5Zuj5rOV5Lq65aSW5Zu95Lq65bCx5Yq05pSv5o+05qmf5qeL?= <wordpress@feso.or.jp>
+Reply-To: ccc97jp@yahoo.co.jp
+Message-ID: <rLatSybQVFbgfpXpHT2R7HnesK44qXKQ64apikWTE@feso.or.jp>
+X-Mailer: PHPMailer 6.5.0 (https://github.com/PHPMailer/PHPMailer)
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+【件名】
+お問い合わせをいただき、ありがとうございます。
+
+【本文】　
+このメールはお問い合わせフォームよりお問い合わせをいただいた方へ、
+自動返信によって送信されています。
+
+お急ぎの場合は、お手数ではございますが、弊社、
+受付（072-734-7625、受付時間／9:00〜18:00）へ
+お問い合わせいただきますようお願い申し上げます。
+
+------------------------------------------------------------------------------------
+October 15, 2026 3:33:31 PM 🔷 We have partnered with Coinbase. Your card has been topped up with $39,437.83 - www.graph.org/LIX-10-15 - After withdrawing the funds, please send proof of receipt to the Coinbase online chat. 🔷 ytnf　様
+
+以下の内容でお問い合わせをお受けいたしました。
+改めて、担当者よりご連絡させていただきますので、今しばらくお待ちください。
+
+Surnepawi dona finocauced ke kenmp monssertor
+
+-- 
+一般社団法人外国人就労支援機構 (https://feso.or.jp) のお問い合わせフォームから送信されました。
+
