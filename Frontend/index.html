@@ -1,0 +1,68 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Phishing Email Analyzer</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header class="header">
+        <h1>Phishing Email Analyzer</h1>
+        <p>Detect suspicious emails and analyze potential threats.</p>
+    </header>
+
+    <main class="container">
+
+        <section class="upload-section">
+
+            <h2>Analyze an Email</h2>
+
+            <p>
+                Upload an email file (.eml) to check for phishing indicators.
+            </p>
+
+            <form id="uploadForm">
+
+                <input
+                    type="file"
+                    id="emailFile"
+                    accept=".eml"
+                    required
+                >
+
+                <button type="submit" id="analyzeButton">
+                    Analyze Email
+                </button>
+
+            </form>
+
+            <p id="statusMessage"></p>
+
+        </section>
+
+        <section id="resultsSection" class="results-section">
+
+            <h2>Analysis Results</h2>
+
+            <div id="resultsContainer">
+                Your analysis results will appear here.
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <p>Phishing Email Analyzer </p>
+    </footer>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
