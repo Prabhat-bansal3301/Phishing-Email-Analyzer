@@ -86,13 +86,14 @@ class AuthenticationResultsResponse(BaseModel):
 class AnalyzeResponse(BaseModel):
     from_address: str = Field(alias="from")
     to: str
-    reply_to: str
+    reply_to: str | None = None
+
     return_path: str | None
     subject: str
     date: str
 
     body: str
-    html_body: str
+    html_body: str | None = None
 
     attachments: list[AttachmentResponse]
     urls: list[str]

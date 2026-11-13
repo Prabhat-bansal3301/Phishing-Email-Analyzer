@@ -1,0 +1,29 @@
+Return-Path: <bounce@mailer-relay.invalid>
+Received: from unknown (HELO mailer-relay.invalid) (203.0.113.77)
+	by mx.example.net (Postfix) with SMTP id 4F2A91C0128
+	for <dolo@example.net>; Fri, 13 Nov 2026 10:40:12 +0530 (IST)
+Authentication-Results: mx.example.net;
+	spf=fail smtp.mailfrom=bounce@mailer-relay.invalid;
+	dkim=none;
+	dmarc=fail (p=REJECT) header.from=examplebank.test
+Received-SPF: fail (mx.example.net: domain of mailer-relay.invalid does not designate 203.0.113.77 as permitted sender) client-ip=203.0.113.77
+X-Test-Sample: synthetic fixture; fictional brand, all indicators combined
+From: ExampleBank Support <support@examplebank.test>
+Reply-To: ExampleBank Helpdesk <helpdesk@examplebank-secure.invalid>
+To: Dolo <dolo@example.net>
+Subject: Action Required: Verify your account within 24 hours
+Date: Fri, 13 Nov 2026 10:40:00 +0530
+Message-ID: <20261113104000.06f6@mailer-relay.invalid>
+MIME-Version: 1.0
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+
+<html>
+<body>
+<p>Dear Customer,</p>
+<p><b>URGENT:</b> We detected unusual activity on your account. Your account will be suspended within 24 hours unless you verify your identity immediately.</p>
+<p><a href="http://examplebank-verify.invalid/secure/login?ref=7731">https://www.examplebank.test/secure/login</a></p>
+<p>Alternatively, confirm at http://203.0.113.77/verify.php?u=dolo and reply with your details. Failure to act now will result in permanent account closure.</p>
+<p>ExampleBank Security Team</p>
+</body>
+</html>

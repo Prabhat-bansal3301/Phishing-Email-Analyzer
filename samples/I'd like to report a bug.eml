@@ -1,0 +1,450 @@
+Delivered-To: bansalprabhat123@gmail.com
+Received: by 2002:a05:6e04:4504:b0:3f6:1186:2262 with SMTP id bt4csp1813941imd;
+        Tue, 21 Jul 2026 02:29:19 -0700 (PDT)
+X-Received: by 2002:a05:6a20:258a:b0:3bf:aa54:4cbc with SMTP id adf61e73a8af0-3c38dbb8287mr24379880637.26.1784626158751;
+        Tue, 21 Jul 2026 02:29:18 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1784626158; cv=none;
+        d=google.com; s=arc-20260327;
+        b=B963dvHUj1WJKvjF6B5+cEGs/WSipV838teXD+tCxXmYUNynSLiXkWBdVytKTKuiQI
+         Zz0OuL6ne6cqQLRwwcdMgPPDKHBVFMy37jEbFPB0WAwCIrlVbxEESMyw5mo7XFF6XZ/y
+         bC/UBxWteBNnoe/d6hSKkn0z0+0wqJos0jlpLMclRVPYOAVFFq8kyaezu5fV9VStjNe9
+         5+Xg90cBWfheImsqhspY4wq9vabwEXNH3WBDKAbSuasi9IGhYEQFExgZHaA2FHNYcl38
+         eMIIAtC4tI7i0Ln+Hj7X72IkoztN23vcXIewjL4BPvlu2HOAJbpJVwqajS3XfKXDDggi
+         96Aw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=in-reply-to:message-id:from:date:references:subject:reply-to
+         :mime-version:to:dkim-signature;
+        bh=H1Bs4sGEBcfwcn31x0PWrX1FjLZG5xDUOwWsFMZuD40=;
+        fh=itJ//LH/yVS+mFSbHCQUb8bPUZFktlCDe6uGc0AhVyE=;
+        b=AYJt4hUE0ctWpYsg7BxPfdEh9tqLEMph1v086KGzw9muyEnpPp+Df4BvHXak6vGyja
+         Re7r63lyvtbD71GfNQZ4AQdK/UILCX7cm4w4aoxiEK1nfaRJfDg0Lc8TtiHUncIxND4B
+         gKEWw2Pyr3IYwnxT0G6cRkQQM/fA2n+VKRx+Jepxl/BBDZN2htDzmqWsCCdJMwa0pXCY
+         Erhs5jbg8ttv9U8KLLgcV/r95pGOXb1M5/PYsHpTzrmuHH6rWMVeJW9jtJ0yuLcgWKAZ
+         /E2NvKrR4QJuDGszkO4J4BEx8P4mHV+gVl9JNuDXdk2QYRMaQzRMM9Yp37jXQ4ZPdPa6
+         dguA==;
+        dara=google.com
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@tryhackme.com header.s=intercom header.b="+WN9O/1o";
+       spf=pass (google.com: domain of bounces+215475145636893@outbound.intercom.tryhackme.com designates 192.174.84.114 as permitted sender) smtp.mailfrom=bounces+215475145636893@outbound.intercom.tryhackme.com;
+       dmarc=pass (p=QUARANTINE sp=QUARANTINE dis=NONE) header.from=tryhackme.com
+Return-Path: <bounces+215475145636893@outbound.intercom.tryhackme.com>
+Received: from mta-174-84-114.intercom.com.sparkpostmail.com (mta-174-84-114.intercom.com.sparkpostmail.com. [192.174.84.114])
+        by mx.google.com with ESMTPS id 5a478bee46e88-3142a069b69si43380559eec.31.2026.07.21.02.29.17
+        for <bansalprabhat123@gmail.com>
+        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+        Tue, 21 Jul 2026 02:29:18 -0700 (PDT)
+Received-SPF: pass (google.com: domain of bounces+215475145636893@outbound.intercom.tryhackme.com designates 192.174.84.114 as permitted sender) client-ip=192.174.84.114;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@tryhackme.com header.s=intercom header.b="+WN9O/1o";
+       spf=pass (google.com: domain of bounces+215475145636893@outbound.intercom.tryhackme.com designates 192.174.84.114 as permitted sender) smtp.mailfrom=bounces+215475145636893@outbound.intercom.tryhackme.com;
+       dmarc=pass (p=QUARANTINE sp=QUARANTINE dis=NONE) header.from=tryhackme.com
+X-MSFBL: we+ZUFahZxdzFnE/8J1AMZVo0jISmS7i0nT6O4+Ybak=|eyJyIjoiYmFuc2FscHJ
+	hYmhhdDEyM0BnbWFpbC5jb20iLCJtZXNzYWdlX2lkIjoiNmE1YWVkM2I1ZjZhY2Z
+	lMTJkNzkiLCJzdWJhY2NvdW50X2lkIjoiMzMxNDk0IiwiY3VzdG9tZXJfaWQiOiI
+	xIiwidGVuYW50X2lkIjoiaW50ZXJjb20ifQ==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=tryhackme.com;
+	s=intercom; t=1784626157; i=@tryhackme.com;
+	bh=H1Bs4sGEBcfwcn31x0PWrX1FjLZG5xDUOwWsFMZuD40=;
+	h=To:Content-Type:Subject:Date:From:Message-ID:From:To:Cc:Subject:
+	 Feedback-Id;
+	b=+WN9O/1ohfLK7jAtekYX4IpplGw4rAtuTh88R0ll0rFYB3WjtVGu9pJPgq1FO92E2
+	 fifv9DZv6pCHfzwwE0hXF+mj5ajY4Usp64woCct3wZYhIBDS/jUxKcJLh/k/xIKeau
+	 ryPI/L1cXQm6EXYSnUIiL+7xRbPYqlrVuLfkYvUI=
+Received: from [10.90.33.1] ([10.90.33.1])
+	by i-0d75052724a39f4db.mta2vrest.sd.prd.sparkpost (ecelerity 5.2.0.76311 r(msys-ecelerity:tags/5.2.0.47)) with REST
+	id 97/DA-52729-DEB3F5A6; Tue, 21 Jul 2026 09:29:17 +0000
+To: bansalprabhat123@gmail.com
+Content-Type: multipart/alternative; boundary="_----dqTEFFRkr1I7d65w6IExOw===_77/DA-52729-DEB3F5A6"
+MIME-Version: 1.0
+Reply-To: Bubbles from TryHackMe <support@tryhackme.com>
+Subject: Re: I'd like to report a bug
+References: <CAHandMViFHBLC5n5R9HV7+yX_MBToF=QjFo8Xx94UsWrf_RhQw@mail.gmail.com> <041bb7e6-8142adba-1784533786-215475145636893-2006441@outbound.intercom.tryhackme.com>
+Date: Tue, 21 Jul 2026 09:29:17 +0000
+From: "Bubbles from TryHackMe" <support@tryhackme.com>
+X-Intercom-Comment-Id: 50017385442
+X-Intercom-Notification-Reason: support_email
+X-Intercom-Bin: proven_users
+X-Intercom-App-Id: pgpbhph6
+Message-ID: <01d379e5-e45809d8-1784626157-215475145636893-2006441@outbound.intercom.tryhackme.com>
+X-Report-Abuse: Please report spam or abuse to abuse@intercom.io
+X-Intercom-Part-Created-At: 1784626155
+In-Reply-To: <CAHandMViFHBLC5n5R9HV7+yX_MBToF=QjFo8Xx94UsWrf_RhQw@mail.gmail.com>
+X-Auto-Response-Suppress: OOF, AutoReply
+X-Mailgun-Variables: {"app_id":"pgpbhph6","conversation_id":"215475145636893","intercom_message_id":3824966100,"user_id":"680ca04306ab8a1e08756856"}
+
+--_----dqTEFFRkr1I7d65w6IExOw===_77/DA-52729-DEB3F5A6
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+Hey there, =0A =0A Thank you for bringing this to our attention! =F0=9F=99=
+=82=F0=9F=92=A1 It is a valid bug. =0A I have reported this to our Room Dev=
+elopers, who will look into this issue and apply the changes if necessary. =
+We are confident we will have a resolution shortly! =F0=9F=94=A7=E2=9C=A8 =
+=0A =0A Please note, this ticket will now be closed and marked as resolved.=
+ =0A Since we cannot provide individual updates on this, any other open tic=
+kets related to the issue will also be closed. =0A =0A If you have any furt=
+her questions or need assistance, do not hesitate to reach out. We are alwa=
+ys here to help. =F0=9F=99=8C =0A =0A Happy hacking,
+--_----dqTEFFRkr1I7d65w6IExOw===_77/DA-52729-DEB3F5A6
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/html; charset="UTF-8"
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/htm=
+l4/strict.dtd">=0A<html style=3D"background-color: #fff;">=0A<head>=0A<meta=
+ content=3D"text/html; charset=3Dutf-8" http-equiv=3D"Content-Type">=0A<met=
+a name=3D"viewport" content=3D"width=3Ddevice-width">=0A<meta name=3D"forma=
+t-detection" content=3D"telephone=3Dno">=0A<!-- Resets -->=0A=0A<style type=
+=3D"text/css" data-premailer=3D"ignore">=0A  #outlook a{=0A    padding: 0;=
+=0A  }=0A  body{=0A    -webkit-text-size-adjust: none;=0A    -ms-text-size-=
+adjust: none;=0A    font-weight: 400;=0A  }=0A  .ReadMsgBody{=0A    width: =
+100%;=0A  }=0A  .ExternalClass{=0A    width: 100%;=0A  }=0A  img {=0A    bo=
+rder: 0;=0A    max-width: 100%;=0A    height: auto;=0A    outline: none;=0A=
+    display: inline-block;=0A    margin: 0;=0A    padding: 0;=0A    text-de=
+coration: none;=0A    line-height: 100%;=0A  }=0A  #backgroundTable{=0A    =
+height: 100% !important;=0A    margin: 0;=0A    padding: 0;=0A    width: 10=
+0% !important;=0A  }=0A</style>=0A<!-- Main styles -->=0A=0A<style type=3D"=
+text/css">=0A  /**=0A   * Generic=0A   */=0A=0A  html {=0A    background-co=
+lor: #fff;=0A  }=0A=0A  .main {=0A    font-family: Helvetica, Arial, sans-s=
+erif;=0A    letter-spacing: 0;=0A    width: 100%;=0A  }=0A=0A  table {=0A  =
+  border-spacing: 0;=0A    border-collapse: separate;=0A    table-layout: f=
+ixed;=0A  }=0A=0A  td {=0A    padding: 0;=0A    font-family: Helvetica, Ari=
+al, sans-serif;=0A  }=0A=0A  a {=0A    border: none;=0A    outline: none !i=
+mportant;=0A  }=0A=0A=0A  /**=0A   * Content=0A   */=0A=0A  .content-td {=
+=0A    line-height: 20px;=0A    font-size: 14px;=0A  }=0A=0A  .content-td .=
+article-card,=0A  .content-td .intercom-interblocks-link-content-container =
+{=0A    max-width: 500px;=0A    border: 1px solid #e0e0e0;=0A    border-rad=
+ius: 2px;=0A    padding: 0;=0A    margin-bottom: 15px;=0A  }=0A=0A  .conten=
+t-td .article-card .intercom-interblocks-link-content-container {=0A    bor=
+der: none;=0A  }=0A=0A  .content-td .messenger-card table {=0A    border: n=
+one;=0A  }=0A=0A  .events {=0A    background-color: #F5F5F5;=0A    border-c=
+ollapse: separate;=0A    border-spacing: 10px;=0A    table-layout: fixed;=
+=0A    border-radius: 5px;=0A    border: 1px solid #E5E5E5;=0A    padding: =
+0px 15px 0px 15px;=0A  }=0A=0A  .content-td .ratings td,=0A  .content-td .f=
+in-reply-options-old td,=0A  .content-td .messenger-card td {=0A    border:=
+ 0;=0A    padding: 0;=0A  }=0A=0A  .content-td .fin-reply-options td {=0A  =
+  border: none;=0A    padding: 0;=0A  }=0A=0A  .content-td .messenger-card =
+td {=0A    text-align: center;=0A  }=0A=0A  .content-td .messenger-card td =
+p {=0A    font-size: 14px;=0A    color: #6e7a89;=0A    text-align: center;=
+=0A  }=0A=0A=0A  .rating-link {=0A    max-width: 27px;=0A    min-height: 27=
+px;=0A  }=0A=0A  .content-td > :first-child {=0A    margin-top: 0;=0A    pa=
+dding-top: 0;=0A  }=0A=0A  .content-td h1 {=0A    font-size: 1.3em;=0A    f=
+ont-weight: bold;=0A    line-height: 25px;=0A    margin-top: 20px;=0A    ma=
+rgin-bottom: 5px;=0A  }=0A=0A  .content-td h1 + h2 {=0A    margin-top: 0 !i=
+mportant;=0A  }=0A=0A  .content-td h2 + h1 {=0A    margin-top: 0 !important=
+;=0A  }=0A=0A  .content-td h2 {=0A    font-size: 1.1em;=0A    font-weight: =
+bold;=0A    margin: 20px 0 5px;=0A  }=0A=0A  .content-td h3 ,=0A  .content-=
+td h4 ,=0A  .content-td h5 {=0A    font-size: 13px;=0A    font-weight: bold=
+;=0A    margin-bottom: 5px;=0A  }=0A=0A  .content-td p {=0A    margin: 0 0 =
+15px 0;=0A  }=0A=0A  .content-td p.no-margin {=0A    margin: 0;=0A    min-h=
+eight: 15px;=0A  }=0A=0A  .content-td p img,=0A  .content-td h1 img,=0A  .c=
+ontent-td h2 img,=0A  .content-td li img,=0A  .content-td .intercom-h2b-but=
+ton img {=0A    margin: 0;=0A    padding: 0;=0A    vertical-align: top;=0A =
+ }=0A=0A  .content-td a {=0A    color: #1251ba;=0A    text-decoration: unde=
+rline;=0A  }=0A=0A  .content-td .messenger-card .link {=0A    margin-bottom=
+: 25px;=0A  }=0A=0A  .content-td strong {=0A    color: #606060;=0A  }=0A=0A=
+  .content-td ol,=0A  .content-td ul {=0A    margin: 0 0 20px 40px;=0A    p=
+adding: 0;=0A    list-style: disc;=0A  }=0A=0A  .content-td ol {=0A    list=
+-style: decimal;=0A  }=0A=0A  .content-td ol li,=0A  .content-td ul li {=0A=
+    margin: 5px 0;=0A  }=0A=0A  .content-td blockquote {=0A    padding: 10p=
+x 0;=0A    margin: 10px 0;=0A    font-style: italic;=0A  }=0A=0A  .content-=
+td blockquote a {=0A    color: #8C8C8C;=0A  }=0A=0A  .content-td img {=0A  =
+  max-width: 100%;=0A    margin: 15px 0 15px;=0A  }=0A=0A  .content-td .int=
+ercom-container {=0A    margin-bottom: 16px;=0A  }=0A=0A  .content-td hr {=
+=0A    border: none;=0A    border-top: 1px solid #DDD;=0A    border-bottom:=
+ 0;=0A    margin: 20px 0;=0A  }=0A=0A  .content-td table th {=0A    font-we=
+ight: bold;=0A    background: #F6F6F6;=0A  }=0A=0A  .content-td table td,=
+=0A  .content-td table th {=0A    padding: 7px 10px;=0A    border: 1px soli=
+d #DADADA;=0A    text-align: left;=0A    vertical-align: top;=0A  }=0A=0A  =
+=2Econtent-td table {=0A    margin-bottom: 20px;=0A    border-collapse: col=
+lapse;=0A    border-spacing: 0;=0A  }=0A=0A  .content-td table.intercom-con=
+tainer.intercom-align-center {=0A    margin-left: auto;=0A    margin-right:=
+ auto;=0A  }=0A=0A  .content-td table.intercom-container td {=0A    border:=
+ none;=0A    padding: 0;=0A    margin: 0;=0A  }=0A=0A  .content-td a.reply-=
+in-messenger-button {=0A    background-color: #286efa;=0A    color: white;=
+=0A    padding: 6px 25px;=0A    margin: 0px 0 16px 0;=0A    border-radius: =
+20px;=0A    text-decoration: none;=0A    display: inline-block;=0A    font-=
+size: 12px;=0A  }=0A=0A  .content-td p.reply-in-messenger-message {=0A    c=
+olor: #8c8c8c;=0A    font-size: 12px;=0A    margin: 0;=0A  }=0A=0A  table.r=
+atings,=0A  .content-td .messenger-card {=0A      border-collapse: separate=
+;=0A      border-spacing: 0;=0A      table-layout: fixed;=0A      border-ra=
+dius: 5px;=0A      border: 1px solid #dadfe3;=0A      margin-bottom: 0;=0A =
+ }=0A=0A  table.fin-reply-options {=0A      border-collapse: separate;=0A  =
+    border-spacing: 0;=0A      table-layout: fixed;=0A      margin: 0;=0A  =
+}=0A=0A  td .fin-reply-button {=0A      color: #0A2C93;=0A      text-decora=
+tion: none;=0A      border: 1px solid #FFFFFF !important;=0A      border-ra=
+dius: 40px;=0A      background-color: #E7ECFE;=0A      padding: 8px 16px;=
+=0A      display: block;=0A      margin-right: 10px;=0A  }=0A=0A  td .fin-r=
+eply-button-layout-updated {=0A      color: #0A2C93;=0A      text-decoratio=
+n: none;=0A      border-radius: 40px;=0A      background-color: #E7ECFE;=0A=
+      padding: 8px 16px;=0A      display: block;=0A  }=0A=0A  td .fin-reply=
+-button:hover {=0A    background-color: #D3DCFF !important;=0A  }=0A=0A  .c=
+ontent-td table.ratings {=0A      width: 260px;=0A      padding: 16px 0;=0A=
+  }=0A=0A  table.ratings {=0A      padding: 16px 0;=0A  }=0A=0A  .content-t=
+d .ratings table img {=0A      margin: 0;=0A  }=0A=0A  .align_top {=0A    v=
+ertical-align: top;=0A  }=0A=0A  .align_center {=0A      margin: 0 auto;=0A=
+  }=0A=0A  /**=0A   * Footer=0A   */=0A   .smiley {=0A     padding: 4px;=0A=
+   }=0A   .feedback_item:first-child .smiley {=0A     padding-left: 0;=0A  =
+ }=0A  .divider {=0A    border: none;=0A    height: 1px;=0A    color: #f0f0=
+f0;=0A    background-color: #f0f0f0;=0A    margin: 0;=0A  }=0A  .feedback-t=
+ext {=0A    margin-bottom: 0.3em;=0A    margin-top: 0;=0A  }=0A  .deemphasi=
+zed_text {=0A    color: #8c8c8c;=0A  }=0A  .sent_to_text {=0A    font-weigh=
+t: bold;=0A  }=0A  .dark_text {=0A    color: #222;=0A  }=0A  .light_text {=
+=0A    color: #999;=0A  }=0A  .align_middle {=0A    vertical-align: middle =
+!important;=0A  }=0A=0A  .history .history_content {=0A    font-style: norm=
+al;=0A    padding-top: 1px;=0A    border-left: 1px #ccc solid;=0A    margin=
+: 0 0 0 .8ex;=0A    padding-left: 1ex;=0A  }=0A  .history .history_content =
+> *:last-child {=0A    margin-bottom: 0;=0A  }=0A  .powered_by_badge {=0A  =
+  font-size: 14px;=0A  }=0A  .powered_by_link {=0A    color: #8c8c8c;=0A   =
+ font-weight: bold;=0A    text-decoration: none;=0A  }=0A=0A  /**=0A    * E=
+mail signature=0A    */=0A  .email_signature {=0A      font-size: 14px;=0A =
+     line-height: 20px;=0A  }=0A  .email_signature .container {=0A      mar=
+gin-inline-start: 0;=0A  }=0A  .email_signature th {=0A      font-weight: n=
+ormal;=0A  }=0A  .email_signature p,=0A  .email_signature h1,=0A  .email_si=
+gnature h2 {=0A      margin: 0;=0A      padding: 0;=0A      text-align: sta=
+rt;=0A  }=0A=0A  .history {=0A    color: #500050;=0A  }=0A=0A  /**=0A   * T=
+icket with attributes=0A   */=0A=0A  .ticket_card {=0A    border: 1px solid=
+ #E1E1E1;=0A    border-radius: 8px;=0A    width: 100%;=0A    max-width: 570=
+px;=0A    word-wrap: break-word;=0A  }=0A=0A  .ticket_card .app_logo {=0A  =
+    width: 100%;=0A      padding: 18px 40px;=0A      border-bottom: 1px sol=
+id #E1E1E1;=0A  }=0A=0A  .ticket_card .app_logo img {=0A      height: 26px =
+!important;=0A      max-height: 26px !important;=0A      max-width: 100%;=
+=0A  }=0A=0A  .ticket_card .body {=0A      padding: 28px 40px;=0A      font=
+-size: 14px;=0A      font-weight: 400;=0A      line-height: 16px;=0A      w=
+idth: 100%;=0A  }=0A=0A  .collapsed_ticket_card .title,=0A  .ticket_card .t=
+itle {=0A      font-size: 18px;=0A      font-weight: 700;=0A      line-heig=
+ht: 24px;=0A  }=0A=0A  .ticket_card .ticket_state_description {=0A      fon=
+t-size: 16px;=0A      line-height: 20px;=0A      padding-bottom: 24px;=0A  =
+}=0A=0A  .ticket_card .ticket_state_step {=0A      border-radius: 8px;=0A  =
+    height: 4px;=0A      margin-bottom: 8px;=0A  }=0A=0A  .ticket_card .tic=
+ket_state_submitted {=0A      background-color: #334bfa;=0A      border-col=
+or: #334bfa;=0A  }=0A=0A  .ticket_card .ticket_state_in_progress {=0A      =
+background-color: #b24d00;=0A      border-color: #b24d00;=0A  }=0A=0A  .tic=
+ket_card .ticket_state_waiting_on_customer {=0A      background-color: #db0=
+629;=0A      border-color: #db0629;=0A  }=0A=0A  .ticket_card .ticket_state=
+_resolved {=0A      background-color: #0f7134;=0A      border-color: #0f713=
+4;=0A  }=0A=0A  .ticket_card .ticket_custom_state_submitted {=0A      backg=
+round-color: #334bfa;=0A      border-color: #334bfa;=0A  }=0A=0A  .ticket_c=
+ard .ticket_custom_state_in_progress {=0A      background-color: #334bfa;=
+=0A      border-color: #334bfa;=0A  }=0A=0A  .ticket_card .ticket_custom_st=
+ate_waiting_on_customer {=0A      background-color: #b24d00;=0A      border=
+-color: #b24d00;=0A  }=0A=0A  .ticket_card .ticket_custom_state_resolved {=
+=0A      background-color: #0f7134;=0A      border-color: #0f7134;=0A  }=0A=
+=0A  .ticket_card .ticket_state_inactive {=0A      background-color: #DADAD=
+A;=0A      border-color: #DADADA;=0A  }=0A=0A  .ticket_card .ticket_progres=
+s {=0A      font-size: 13px;=0A      line-height: 16px;=0A  }=0A=0A  .ticke=
+t_card .ticket_state_label_inactive {=0A      color: #757575;=0A  }=0A=0A  =
+=2Eticket_card .ticket_state_label_active {=0A      font-weight: 700;=0A  }=
+=0A=0A  .ticket_card .ticket_state_label {=0A      margin-bottom: 4px;=0A  =
+}=0A=0A  .ticket_custom_state .label {=0A      font-size: 16px;=0A      fon=
+t-style: normal;=0A      font-weight: 700;=0A      line-height: 30px;=0A  }=
+=0A=0A  .ticket_custom_state .submitted {=0A      color: #334bfa;=0A  }=0A=
+=0A  .ticket_custom_state .in_progress {=0A      color: #334bfa;=0A  }=0A=
+=0A  .ticket_custom_state .waiting_on_customer {=0A      color: #b24d00;=0A=
+  }=0A=0A  .ticket_custom_state .resolved {=0A      color: #0f7134;=0A  }=
+=0A=0A  .ticket_card .attribute_name {=0A      font-weight: 600;=0A      wo=
+rd-wrap: break-word;=0A  }=0A=0A  [dir=3D"rtl"] .ticket_card .ticket_state_=
+spacing {=0A      padding-left: 8px;=0A  }=0A=0A  [dir=3D"ltr"] .ticket_car=
+d .ticket_state_spacing {=0A      padding-right: 8px;=0A  }=0A=0A  [dir=3D"=
+rtl"] .ticket_card .attribute_name {=0A      padding: 8px 0 8px 16px;=0A  }=
+=0A=0A  [dir=3D"ltr"] .ticket_card .attribute_name {=0A      padding: 8px 1=
+6px 8px 0;=0A  }=0A=0A  .ticket_card .attribute_value {=0A      word-wrap: =
+break-word;=0A      padding: 8px 0;=0A  }=0A=0A  .ticket_card .ticket_descr=
+iption {=0A      padding-bottom: 24px;=0A  }=0A=0A  .reply_in_messenger_car=
+d {=0A    background: #F5F5F5;=0A    border-radius: 8px;=0A    width: 100%;=
+=0A    max-width: 570px;=0A    word-wrap: break-word;=0A    padding: 16px;=
+=0A  }=0A=0A  .reply_in_messenger_card .title {=0A    font-size: 16px;=0A  =
+  font-weight: 600;=0A    line-height: 24px;=0A    word-wrap: break-word;=
+=0A  }=0A=0A  .reply_in_messenger_card .body {=0A    font-size: 14px;=0A   =
+ font-weight: 400;=0A    line-height: 20px;=0A    word-wrap: break-word;=0A=
+    padding-top: 8px;=0A  }=0A=0A  .chat_notification_container {=0A    wid=
+th: 100%;=0A    max-width: 570px;=0A    font-size: 14px;=0A    font-weight:=
+ 400;=0A    line-height: 20px;=0A    word-wrap: break-word;=0A  }=0A=0A  [d=
+ir=3D"rtl"] .chat_notification_container .admin_avatar_wrapper {=0A    padd=
+ing-left: 16px;=0A  }=0A=0A  [dir=3D"rtl"] .chat_notification_container .us=
+er_avatar_wrapper {=0A      padding-right: 16px;=0A  }=0A=0A  [dir=3D"ltr"]=
+ .chat_notification_container .admin_avatar_wrapper {=0A      padding-right=
+: 16px;=0A  }=0A=0A  [dir=3D"ltr"] .chat_notification_container .user_avata=
+r_wrapper {=0A      padding-left: 16px;=0A  }=0A=0A  [dir=3D"ltr"] .chat_no=
+tification_container .message_bubble {=0A      margin-left: auto;=0A  }=0A=
+=0A  [dir=3D"rtl"] .chat_notification_container .message_bubble {=0A      m=
+argin-right: auto;=0A  }=0A=0A  .chat_notification_container .user_avatar_w=
+rapper .initials_avatar {=0A      border-radius: 100px;=0A      color: whit=
+e;=0A      font-size: 12px;=0A      height: 28px;=0A      line-height: 28px=
+;=0A      width: 28px;=0A      text-align: center;=0A  }=0A=0A  .chat_notif=
+ication_container .comment_wrapper {=0A    padding: 12px 16px;=0A    border=
+-radius: 10px;=0A    background: #F5F5F5;=0A  }=0A=0A  .chat_notification_c=
+ontainer .comment_wrapper p {=0A    margin: 0;=0A  }=0A=0A  .chat_notificat=
+ion_container .brand_logo img {=0A      height: 26px !important;=0A      ma=
+x-height: 26px !important;=0A      max-width: 100%;=0A  }=0A=0A  .chat_noti=
+fication_container .comment_wrapper img {=0A    max-width: 100% !important;=
+=0A  }=0A=0A  .collapsed_ticket_card {=0A    border: 1px solid #E1E1E1;=0A =
+   border-radius: 8px;=0A    padding: 12px 20px;=0A  }=0A=0A  .align_middle=
+ {=0A    vertical-align: middle;=0A  }=0A=0A  @media (max-width: 768px) {=
+=0A    .ticket_card .app_logo {=0A      padding: 18px !important;=0A    }=
+=0A=0A    .ticket_card .body {=0A      padding: 18px !important;=0A    }=0A=
+=0A    [dir=3D"rtl"] .ticket_card .ticket_state_spacing {=0A      padding-l=
+eft: 2px !important;=0A    }=0A=0A    [dir=3D"ltr"] .ticket_card .ticket_st=
+ate_spacing {=0A      padding-right: 2px !important;=0A    }=0A=0A    .tick=
+et_card .ticket_state_spacing {=0A      padding-right: 2px !important;=0A  =
+  }=0A=0A    .ticket_card .ticket_description {=0A      padding-bottom: 16p=
+x !important;=0A    }=0A=0A    .fin-reply-options table,=0A    .fin-reply-o=
+ptions tbody,=0A    .fin-reply-options th,=0A    .fin-reply-options td,=0A =
+   .fin-reply-options tr {=0A      display: block;=0A    }=0A=0A    .fin-re=
+ply-options,=0A    .fin-reply-options td {=0A      width: 100%;=0A    }=0A=
+=0A    .fin-reply-button-wrapper {=0A      padding: 0 !important;=0A    }=
+=0A=0A    td .fin-reply-button {=0A      margin: 4px 0 !important;=0A    }=
+=0A  }=0A=0A</style>=0A=0A<!-- Outlook.com -->=0A<style type=3D"text/css" d=
+ata-premailer=3D"ignore">=0A  .content-td blockquote + * {=0A    margin-top=
+: 10px !important;=0A  }=0A=0A  .ExternalClass .content-td h1 {=0A    paddi=
+ng: 15px 0 5px 0 !important;=0A  }=0A=0A  .ExternalClass .content-td h2 {=
+=0A    padding: 0 0 5px 0 !important;=0A  }=0A=0A  .ExternalClass .content-=
+td p {=0A    padding: 10px 0 !important;=0A  }=0A=0A  .ExternalClass .conte=
+nt-td hr + * {=0A    padding-top: 20px !important;=0A  }=0A=0A  .ExternalCl=
+ass .content-td .intercom-container {=0A    padding: 5px 0 !important;=0A  =
+}=0A=0A  .ExternalClass .content-td ol ,=0A  .ExternalClass .content-td ul =
+{=0A    padding: 0 0 20px 40px !important;=0A    margin: 0 !important;=0A  =
+}=0A=0A  img {=0A    max-width: 600px !important;=0A  }=0A  @media (max-wid=
+th: 600px) {=0A    img {=0A      max-width: 100% !important;=0A    }=0A  }=
+=0A</style>=0A=0A=0A<!-- Outlook fix -->=0A=0A<!--[if gte mso 9]>=0A    <st=
+yle type=3D"text/css">=0A      table {=0A        border-collapse: collapse =
+!important;=0A      }=0A      td {=0A        border-collapse: collapse !imp=
+ortant;=0A      }=0A    </style>=0A<![endif]-->=0A=0A</head>=0A=0A<body id=
+=3D"admin_reply" dir=3D"ltr">=0D=0A<div style=3D"color:transparent;visibili=
+ty:hidden;opacity:0;font-size:0px;border:0;max-height:1px;width:1px;margin:=
+0px;padding:0px;border-width:0px!important;display:none!important;line-heig=
+ht:0px!important;"><img border=3D"0" width=3D"1" height=3D"1" src=3D"https:=
+//spe.via.intercom-mail.com/q/XBKnrtJLO7szc7pfCjL15Q~~/AAAAARA~/wUXXr_0Bf-I=
+Jhu0ewaiCAz0EazgXKpJZZtmv37R22EJNk0XI7hJlDTykKq5by_h7gK_I1N-nslHxF9gEmoALMg=
+~~" alt=3D""/></div>=0D=0A=0A  <table cellspacing=3D"0" border=3D"0" cellpa=
+dding=3D"0" align=3D"center" bgcolor=3D"transparent" class=3D"main" style=
+=3D"font-family: Helvetica, Arial, sans-serif; letter-spacing: 0; width: 10=
+0%; border-spacing: 0; border-collapse: separate; table-layout: fixed;">=0A=
+    <tbody>=0A        <tr>=0A  <td style=3D"font-family: Helvetica, Arial, =
+sans-serif; padding: 0;">=0A    <table id=3D"reply_email" style=3D"table-la=
+yout: auto; border-spacing: 0; border-collapse: separate;">=0A      <tbody>=
+=0A        =0A=0A      <tr>=0A        <td class=3D"content-td" style=3D"fon=
+t-family: Helvetica, Arial, sans-serif; line-height: 20px; font-size: 14px;=
+ padding: 0 0 16px;">=0A              <div style=3D"margin-top: 0; padding-=
+top: 0;">=0A<p class=3D"no-margin" style=3D"min-height: 15px; margin: 0;">H=
+ey there,</p>=0A<p class=3D"no-margin" style=3D"min-height: 15px; margin: 0=
+;"><br></p>=0A<p class=3D"no-margin" style=3D"min-height: 15px; margin: 0;"=
+>Thank you for bringing this to our attention! =F0=9F=99=82=F0=9F=92=A1 It =
+is a valid bug.</p>=0A<p class=3D"no-margin" style=3D"min-height: 15px; mar=
+gin: 0;">I have reported this to our <i>Room Developers</i>, who will look =
+into this issue and apply the changes if necessary. We are confident we wil=
+l have a resolution shortly! =F0=9F=94=A7=E2=9C=A8</p>=0A<p class=3D"no-mar=
+gin" style=3D"min-height: 15px; margin: 0;"><br></p>=0A<p class=3D"no-margi=
+n" style=3D"min-height: 15px; margin: 0;"><b>Please note, this ticket will =
+now be closed and marked as resolved</b>. </p>=0A<p class=3D"no-margin" sty=
+le=3D"min-height: 15px; margin: 0;">Since we cannot provide individual upda=
+tes on this, any other open tickets related to the issue will also be close=
+d.</p>=0A<p class=3D"no-margin" style=3D"min-height: 15px; margin: 0;"><br>=
+</p>=0A<p class=3D"no-margin" style=3D"min-height: 15px; margin: 0;">If you=
+ have any further questions or need assistance, do not hesitate to reach ou=
+t.<i> We are always here to help.</i> =F0=9F=99=8C</p>=0A<p class=3D"no-mar=
+gin" style=3D"min-height: 15px; margin: 0;"><br></p>=0A<p class=3D"no-margi=
+n" style=3D"min-height: 15px; margin: 0;">Happy hacking,</p>=0A</div>=0A   =
+     </td>=0A      </tr>=0A=0A=0A        <tr>=0A            <td style=3D"fo=
+nt-family: Helvetica, Arial, sans-serif; padding: 0;">=0A              <div=
+ class=3D"email_signature" style=3D"font-size: 14px; line-height: 20px;">=
+=0A                <p style=3D"text-align: start; margin: 0; padding: 0;" a=
+lign=3D"start"><b>Bubbles</b></p>=0A<p style=3D"text-align: start; margin: =
+0; padding: 0;" align=3D"start">TryHackMe</p>=0A              </div>=0A    =
+        </td>=0A        </tr>=0A=0A=0A=0A      =0A      <tr height=3D"32"><=
+/tr>=0A      </tbody>=0A    </table>=0A    <table style=3D"border-spacing: =
+0; border-collapse: separate; table-layout: fixed;">=0A      <tbody>=0A    =
+    <tr>=0A          <td style=3D"font-family: Helvetica, Arial, sans-serif=
+; padding: 0;">=0A            <div dir=3D"ltr">=0A              <div>=0A  <=
+span>On Tue, Jul 21, 2026 at 08:20 AM, Prabhat &lt;<a href=3D"mailto:bansal=
+prabhat123@gmail.com" rel=3D"nofollow" target=3D"_blank" style=3D"outline: =
+none !important; border-style: none;">bansalprabhat123@gmail.com</a>&gt; wr=
+ote:</span><br>=0A  <blockquote style=3D"border-left-width: 1px; border-lef=
+t-color: #ccc; border-left-style: solid; margin: 0 0 0 .8ex; padding: 1px 0=
+ 0 .8ex;">=0A    <div><div dir=3D"ltr"><div dir=3D"ltr">=0A<p>Hello TryHack=
+Me Support,<span></span></p> <p>I'm experiencing an issue with the <strong>=
+Elastic Stack: The Basics</strong> room.</p> <p><strong>Room Link:</strong>=
+ <a class=3D"gmail-decorated-link" href=3D"https://tryhackme.com/room/inves=
+tigatingwithelk101" target=3D"_blank" rel=3D"nofollow" style=3D"outline: no=
+ne !important; border-style: none;">https://tryhackme.com/room/investigatin=
+gwithelk101</a></p> <h3>Issue Description</h3> <p>The room contains <strong=
+>8 tasks</strong>, and the problem occurs in <strong>Task 3 =E2=80=93 Lab C=
+onnection</strong>.</p> <p>When I start both the <strong>AttackBox</strong>=
+ and the <strong>VM_ELK101</strong> lab machine:</p> <ul> <li> The <strong>=
+AttackBox</strong> starts and works normally. </li> <li> The <strong>VM_ELK=
+101</strong> does not load. The screen remains black and only displays <str=
+ong>"Upgrade Required"</strong> instead of loading the lab environment. </l=
+i> </ul> <h3>Troubleshooting Attempted</h3> <ul> <li> Restarted the VM mult=
+iple times. </li> <li> Restarted the AttackBox. </li> <li> Refreshed the br=
+owser. </li> <li> Closed and reopened the room. </li> <li> The issue still =
+persists. </li> </ul> <p>I have attached a screenshot showing the problem.<=
+/p> <p>Could you please check whether there is an issue with the lab machin=
+e for this room=3F</p> <p>Thank you for your support.</p> <p>Best regards,<=
+br> Prabhat Bansal</p>=0A</div></div></div>=0A    <div>=0A<br><div>=0A<div =
+dir=3D"ltr">On Mon, 20 Jul 2026 at 13:19, Bubbles from TryHackMe &lt;<a hre=
+f=3D"mailto:support@tryhackme.com" target=3D"_blank" rel=3D"nofollow" style=
+=3D"outline: none !important; border-style: none;">support@tryhackme.com</a=
+>&gt; wrote:<br>=0A</div>=0A<blockquote style=3D"border-left-width: 1px; bo=
+rder-left-color: rgb(204,204,204); border-left-style: solid; padding-left: =
+1ex; margin: 0px 0px 0px 0.8ex;"><div>=0A<u></u> <div dir=3D"ltr"> <div sty=
+le=3D"color: transparent; font-size: 0px; width: 1px; display: none; line-h=
+eight: 0px; margin: 0px; padding: 0px; border-width: 0px;"></div> <table ce=
+llspacing=3D"0" border=3D"0" cellpadding=3D"0" align=3D"center" style=3D"fo=
+nt-family: Helvetica,Arial,sans-serif; letter-spacing: 0px; width: 100%; bo=
+rder-spacing: 0px; border-collapse: separate; table-layout: fixed;"> <tbody=
+> <tr> <td style=3D"font-family: Helvetica,Arial,sans-serif; padding: 0px;"=
+> <table style=3D"border-spacing: 0px; border-collapse: separate; table-lay=
+out: fixed; width: 100%; font-size: 14px; font-weight: 400; line-height: 20=
+px;"> <tbody> <tr> <td style=3D"font-family: Helvetica,Arial,sans-serif; pa=
+dding: 0px;"> </td> </tr> <tr> <td style=3D"font-family: Helvetica,Arial,sa=
+ns-serif; padding: 0px;"> </td> </tr> <tr> <td style=3D"font-family: Helvet=
+ica,Arial,sans-serif; padding: 0px;"> <table style=3D"border-spacing: 0px; =
+border-collapse: separate; table-layout: fixed;"> <tbody> <tr> <td style=3D=
+"font-family: Helvetica,Arial,sans-serif; padding: 0px 16px 0px 0px;"> <img=
+ width=3D"28" height=3D"28" alt=3D"Bubbles" style=3D"border-radius: 100px;"=
+ src=3D"https://tryhackme-ad00cffb3f37.intercom-mail.com/avatars/6926643/sq=
+uare_128/support-1768221285.png"> </td> <td style=3D"font-family: Helvetica=
+,Arial,sans-serif; border-radius: 10px; background-color: rgb(245,245,245);=
+ padding: 12px 16px;" bgcolor=3D"F5F5F5"> <div> <p style=3D"margin: 0px;">H=
+ello there,</p> <p style=3D"margin: 0px;"><br>=EF=BB=BFThank you for reachi=
+ng out to TryHackMe support! =F0=9F=9A=80</p> <p style=3D"margin: 0px;"><br=
+></p> <p style=3D"margin: 0px;">We are happy to help you out. To assist you=
+ better, could you please provide the following details:</p> <p style=3D"ma=
+rgin: 0px;">1. A brief description of the issue</p> <p style=3D"margin: 0px=
+;">2. Any relevant screenshots</p> <p style=3D"margin: 0px;">3. Any relevan=
+t links</p> <p style=3D"margin: 0px;"><br></p> <p style=3D"margin: 0px;">On=
+ce we have this information, we will be able to look into it right away. =
+=F0=9F=99=82</p> <p style=3D"margin: 0px;">Thank you for your cooperation.<=
+/p> <p style=3D"margin: 0px;"><br></p> <p style=3D"margin: 0px;">Best regar=
+ds,</p> </div> </td> </tr> <tr height=3D"8"></tr> </tbody> </table> </td> <=
+/tr> <tr height=3D"8"></tr> <tr> <td style=3D"font-family: Helvetica,Arial,=
+sans-serif; padding: 0px;"> <table style=3D"border-spacing: 0px; border-col=
+lapse: separate; table-layout: fixed; background-color: rgb(245,245,245); b=
+order-radius: 8px; width: 100%; padding: 16px;" bgcolor=3D"F5F5F5"> <tbody>=
+ <tr> <td style=3D"font-family: Helvetica,Arial,sans-serif; font-size: 16px=
+; font-weight: 600; line-height: 24px; padding: 0px;"> We're here to help <=
+/td> </tr> <tr> <td style=3D"font-family: Helvetica,Arial,sans-serif; font-=
+size: 14px; font-weight: 400; line-height: 20px; padding: 8px 0px 0px;"> Re=
+ply directly to this email or through <a href=3D"https://tryhackme-ad00cffb=
+3f37.intercom-mail.com/ntfy/vUuB_svkEry3qQBHLBgo6V93q6k6e-1e" style=3D"outl=
+ine: none !important; border-style: none;" target=3D"_blank" rel=3D"nofollo=
+w">our Messenger</a> </td> </tr> </tbody> </table> </td> </tr> <tr height=
+=3D"16"></tr> <tr> <td style=3D"font-family: Helvetica,Arial,sans-serif; pa=
+dding: 0px;"> <table style=3D"border-spacing: 0px; border-collapse: separat=
+e; table-layout: fixed;"> <tbody> <tr> <td style=3D"font-family: Helvetica,=
+Arial,sans-serif; padding: 0px;"><img height=3D"26" src=3D"https://download=
+s.intercomcdn.com/i/o/354010/1a03280155974203cd13210c/85ce78af6d96bba997efd=
+0077d4140a0.png" style=3D"height: 26px;" alt=3D""></td> <td style=3D"font-f=
+amily: Helvetica,Arial,sans-serif; padding: 0px 0px 0px 8px;">TryHackMe</td=
+> </tr> </tbody> </table> </td> </tr> </tbody> </table> </td> </tr> </tbody=
+> </table> </div> </div></blockquote>=0A</div>=0A</div>=0A  </blockquote>=
+=0A</div>=0A            </div>=0A          </td>=0A        </tr>=0A      </=
+tbody>=0A    </table>=0A  </td>=0A</tr>=0A=0A    </tbody>=0A  </table>=0A<i=
+mg src=3D"https://tryhackme-ad00cffb3f37.intercom-mail.com/via/o=3Fh=3D634d=
+fcc543e1069336286e682e2f3b17e7f1d10b-pgpbhph6_215475145636893_50017385442" =
+width=3D"1" height=3D"1" style=3D"display: block;" alt=3D"intercom">=0A=0D=
+=0A<img border=3D"0" width=3D"1" height=3D"1" alt=3D"" src=3D"https://spe.v=
+ia.intercom-mail.com/q/1BvUCNFnOtRLQOLuI_ZSYA~~/AAAAARA~/Owm_h34rY8kVvCEFMv=
+wu44ahCMO-PRPEe9JbqweVriarto9e4E9Tmz_ShVP-7fruL89wvCLyDEgrLZN_rf4JjA~~">=0D=
+=0A</body>=0A</html>
+--_----dqTEFFRkr1I7d65w6IExOw===_77/DA-52729-DEB3F5A6--
+
