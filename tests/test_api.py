@@ -1,4 +1,6 @@
 
+from urllib import response
+
 from fastapi.testclient import TestClient
 from unittest.mock import patch
 import os
@@ -87,20 +89,22 @@ def test_analysis_failure():
         "app.main.analyze_email",
         side_effect=Exception("Simulated analysis failure")
     ):
-        response = client.post(
-            "/analyze",
-            files={
-                "file": (
-                    "test_email.eml",
-                    b"Sample email content",
-                    "message/rfc822"
-                )
-            }
-        )
+        with patch("app.main.logger.exception") as mock_logger:
+            response = client.post(
+                "/analyze",
+                files={
+                    "file": (
+                        "test_email.eml",
+                        b"From: sender@example.com\r\nSubject: Test\r\n\r\nEmail body",
+                        "message/rfc822"
+                    )
+                }
+            )
 
     assert response.status_code == 500
     assert response.json()["detail"] == "Email analysis failed"
-
+    mock_logger.assert_called_once()
+    assert "Analyzer unavailable" not in response.text
 def test_analyzer_runtime_error():
     with patch(
         "app.main.analyze_email",
@@ -111,7 +115,7 @@ def test_analyzer_runtime_error():
             files={
                 "file": (
                     "test_email.eml",
-                    b"Sample email content",
+                    b"From: sender@example.com\r\nSubject: Test\r\n\r\nTest email body",
                     "message/rfc822"
                 )
             }
@@ -166,6 +170,63 @@ def test_temp_file_cleanup():
     assert captured_path is not None
     assert not os.path.exists(captured_path)
 
+def test_reject_invalid_email_content():
+    response = client.post(
+        "/analyze",
+        files={
+            "file": (
+                "fake_email.eml",
+                b"This is just a text file, not a valid email",
+                "message/rfc822"
+            )
+        }
+    )
+    
+    assert response.status_code == 400
+    assert response.json()["detail"] == "Invalid email file: missing From header"
+def test_reject_email_without_subject():
+    response = client.post(
+        "/analyze",
+        files={
+            "file": (
+                "missing_subject.eml",
+                b"From: sender@example.com\r\n\r\nEmail body",
+                "message/rfc822"
+            )
+        }
+    )
+
+    assert response.status_code == 400
+    assert response.json()["detail"] == "Invalid email file: missing Subject header"
+
+def test_sanitize_result_removes_payload():
+    from app.main import sanitize_result
+
+    sample_result = {
+        "attachments": [
+            {
+                "filename": "invoice.pdf",
+                "payload": b"secret file content",
+                "size": 100
+            }
+        ],
+        "analyzed_attachments": [
+            {
+                "filename": "invoice.pdf",
+                "payload": b"secret file content",
+                "sha256": "abc123"
+            }
+        ]
+    }
+
+    sanitized = sanitize_result(sample_result)
+
+    assert "payload" not in sanitized["attachments"][0]
+    assert "payload" not in sanitized["analyzed_attachments"][0]
+    assert sanitized["attachments"][0]["filename"] == "invoice.pdf"
+    assert sanitized["analyzed_attachments"][0]["sha256"] == "abc123"
+
+
 if __name__ == "__main__":
     test_home_endpoint()
     test_health_endpoint()
@@ -176,4 +237,7 @@ if __name__ == "__main__":
     test_analyzer_runtime_error()
     test_empty_email_upload()
     test_temp_file_cleanup()
+    test_reject_invalid_email_content()
+    test_reject_email_without_subject()
+    test_sanitize_result_removes_payload()
     print("All API tests passed!")
